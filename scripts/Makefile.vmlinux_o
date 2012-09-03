@@ -51,9 +51,9 @@ objtool_args := \
 # Link of vmlinux.o used for section mismatch analysis
 # ---------------------------------------------------------------------------
 
-quiet_cmd_ld_vmlinux.o = LD      $@
+quiet_cmd_ld_vmlinux.o = LDFINAL $@
       cmd_ld_vmlinux.o = \
-	$(LD) ${KBUILD_LDFLAGS} -r -o $@ \
+	$(LDFINAL) ${KBUILD_LDFLAGS} -r -o $@ \
 	$(addprefix -T , $(initcalls-lds)) \
 	--whole-archive $(KBUILD_VMLINUX_OBJS) --no-whole-archive \
 	--start-group $(KBUILD_VMLINUX_LIBS) --end-group \
