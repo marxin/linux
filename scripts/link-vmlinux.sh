@@ -56,7 +56,7 @@ gen_initcalls()
 		> .tmp_initcalls.lds
 }
 
-# If CONFIG_LTO_CLANG is selected, collect generated symbol versions into
+# If CONFIG_LTO is selected, collect generated symbol versions into
 # .tmp_symversions.lds
 gen_symversions()
 {
@@ -109,7 +109,7 @@ objtool_link()
 	local objtoolopt;
 
 	if is_enabled CONFIG_STACK_VALIDATION && \
-	   ( is_enabled CONFIG_LTO_CLANG || is_enabled CONFIG_X86_KERNEL_IBT ); then
+	   ( is_enabled CONFIG_LTO || is_enabled CONFIG_X86_KERNEL_IBT ); then
 
 		# Don't perform vmlinux validation unless explicitly requested,
 		# but run objtool on vmlinux.o now that we have an object file.
