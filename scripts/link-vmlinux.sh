@@ -56,7 +56,7 @@ gen_initcalls()
 		> .tmp_initcalls.lds
 }
 
-# If CONFIG_LTO_CLANG is selected, collect generated symbol versions into
+# If CONFIG_LTO is selected, collect generated symbol versions into
 # .tmp_symversions.lds
 gen_symversions()
 {
@@ -112,7 +112,7 @@ objtool_link()
 		return;
 	fi
 
-	if is_enabled CONFIG_LTO_CLANG || is_enabled CONFIG_X86_KERNEL_IBT; then
+	if is_enabled CONFIG_LTO || is_enabled CONFIG_X86_KERNEL_IBT; then
 
 		# For LTO and IBT, objtool doesn't run on individual
 		# translation units.  Run everything on vmlinux instead.
