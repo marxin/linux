@@ -82,6 +82,7 @@ static int get_alt_entry(struct elf *elf, struct special_entry *entry,
 						   entry->orig_len);
 		alt->new_len = *(unsigned char *)(sec->data->d_buf + offset +
 						  entry->new_len);
+		alt->new_sec = alt->orig_sec;
 	}
 
 	if (entry->feature) {
@@ -108,6 +109,11 @@ static int get_alt_entry(struct elf *elf, struct special_entry *entry,
 				  sec, offset + entry->new);
 			return -1;
 		}
+		if (!new_reloc->sym->sec) {
+			WARN_FUNC("can't find new reloc symbol sec",
+				  sec, offset + entry->new);
+			return -1;
+		}
 
 		reloc_to_sec_off(new_reloc, &alt->new_sec, &alt->new_off);
 
@@ -127,6 +133,9 @@ static int get_alt_entry(struct elf *elf, struct special_entry *entry,
 		}
 		alt->key_addend = key_reloc->addend;
 	}
+
+	if (!alt->new_sec)
+		return -1;
 
 	return 0;
 }
