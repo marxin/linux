@@ -293,7 +293,7 @@ ifneq ($(CONFIG_LTO)$(CONFIG_X86_KERNEL_IBT),)
 # before ELF processing
 quiet_cmd_cc_prelink_modules = LD [M]  $@
       cmd_cc_prelink_modules =						\
-	$(LD) $(ld_flags) -r -o $@					\
+	$(LDFINAL) $(ld_flags) -r -o $@					\
                $(shell [ -s $(@:.prelink.o=.o.symversions) ] &&		\
                        echo -T $(@:.prelink.o=.o.symversions))		\
 		--whole-archive $(filter-out FORCE,$^)			\
