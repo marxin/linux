@@ -501,12 +501,12 @@ early_initcall(static_call_init);
 
 #ifdef CONFIG_STATIC_CALL_SELFTEST
 
-static int func_a(int x)
+int __visible func_a(int x)
 {
 	return x+1;
 }
 
-static int func_b(int x)
+int __visible func_b(int x)
 {
 	return x+2;
 }
