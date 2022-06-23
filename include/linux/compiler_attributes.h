@@ -155,8 +155,10 @@
  */
 #if __has_attribute(__externally_visible__)
 # define __visible                      __attribute__((__externally_visible__))
+# define __visible_on_lto		__visible
 #else
 # define __visible
+# define __visible_on_lto		static
 #endif
 
 /*
